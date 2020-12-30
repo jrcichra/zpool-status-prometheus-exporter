@@ -21,7 +21,8 @@ sub collect {
     my $pools_cmd = 'zpool list -H | awk \'{print $1}\'';
     my @pools     = split( '\n', `$pools_cmd` );
     foreach my $pool (@pools) {
-        print "Swimming in $pool\n";
+
+        # print "Swimming in $pool\n";
 
         # run the zpool status command
         my $zpool_status = `zpool status -v $pool`;
@@ -51,7 +52,8 @@ sub collect {
 
         # loop through each array element
         foreach my $line (@zpool_status_config_arr) {
-            print "Processing $line\n";
+
+            # print "Processing $line\n";
 
             # make an array based on space separation
             my @elements = split( ' ', $line );
