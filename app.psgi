@@ -6,6 +6,15 @@ use Plack::Builder;
 
 my $prom = Prometheus::Tiny->new;
 
+my %statuses = (
+    ONLINE   => 0,
+    DEGRADED => 1,
+    FAULTED  => 2,
+    OFFLINE  => 3,
+    UNAVAIL  => 4,
+    REMOVED  => 5,
+);
+
 sub collect {
 
     # collect stuff
@@ -46,8 +55,15 @@ sub collect {
 
             # make an array based on space separation
             my @elements = split( ' ', $line );
-            $prom->set( "zpool_state", $elements[1],
-                { "pool" => $pool, "name" => $elements[0] } );
+            $prom->set(
+                "zpool_state",
+                $statuses{ $elements[1] },
+                {
+                    "pool"  => $pool,
+                    "name"  => $elements[0],
+                    "state" => $elements[1],
+                }
+            );
             $prom->set( "zpool_read_errors", $elements[2],
                 { "pool" => $pool, "name" => $elements[0] } );
             $prom->set( "zpool_write_errors", $elements[3],
@@ -59,7 +75,8 @@ sub collect {
         # solo stats
         # grab the pool state: ONLINE, DEGRADED, OFFLINE, etc
         my ($zpool_state) = $zpool_status =~ /state: (.*)\n/;
-        $prom->set( 'zpool_state', $zpool_state, { "pool" => $pool } );
+        $prom->set( 'zpool_state', $statuses{$zpool_state},
+            { "pool" => $pool, "state" => $zpool_state } );
     }
 }
 
