@@ -3,7 +3,6 @@ use strict;
 use warnings;
 use Prometheus::Tiny;
 use Plack::Builder;
-use Data::Dumper;
 
 my $prom = Prometheus::Tiny->new;
 
