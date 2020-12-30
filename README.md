@@ -1,8 +1,8 @@
 # zpool-status-prometheus-exporter
 Simple Perl Prometheus exporter for `zpool status`. Know when your pool had problems.
 
-# Dependencies (needs > Ubuntu 20.10)
-`sudo apt install libprometheus-tiny-perl libplack-perl`
+# Dependencies (needs >= Ubuntu 20.10)
+`sudo apt install perl libprometheus-tiny-perl libplack-perl`
 
 # Usage
 `./app.psgi` - shebang calls `plackup`
