@@ -48,13 +48,13 @@ sub collect {
             # make an array based on space separation
             my @elements = split( ' ', $line );
             $prom->set( "zpool_state", $elements[1],
-                { "pool" => $pool, "entity" => $elements[0] } );
+                { "pool" => $pool, "name" => $elements[0] } );
             $prom->set( "zpool_read_errors", $elements[2],
-                { "pool" => $pool, "entity" => $elements[0] } );
+                { "pool" => $pool, "name" => $elements[0] } );
             $prom->set( "zpool_write_errors", $elements[3],
-                { "pool" => $pool, "entity" => $elements[0] } );
+                { "pool" => $pool, "name" => $elements[0] } );
             $prom->set( "zpool_checksum_errors", $elements[4],
-                { "pool" => $pool, "entity" => $elements[0] } );
+                { "pool" => $pool, "name" => $elements[0] } );
         }
 
         # solo stats
