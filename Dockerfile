@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 EXPOSE 5000
 RUN apt-get update && apt-get install -y \
     zfsutils-linux perl libprometheus-tiny-perl libplack-perl \
